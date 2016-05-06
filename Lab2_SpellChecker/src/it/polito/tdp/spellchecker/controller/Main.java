@@ -1,6 +1,7 @@
 package it.polito.tdp.spellchecker.controller;
 	
-import it.polito.tdp.spellchecker.model.RichWord;
+
+import it.polito.tdp.spellchecker.model.DictionaryModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -12,19 +13,21 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-		
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("SpellChecker.fxml"));
+			FXMLLoader loader= new FXMLLoader(getClass().getResource("SpellChecker.fxml"));
 			BorderPane root = (BorderPane)loader.load();
 			
-			Scene scene = new Scene(root,400,400);
+			SpellCheckerController controller=loader.getController();
+			DictionaryModel model = new DictionaryModel();
+			controller.setModel(model);
+			
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			SpellCheckerController controller = loader.getController();
-			RichWord model = new RichWord();
-			// controller.setModel (model);
+			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
